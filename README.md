@@ -37,9 +37,9 @@ o gerenciamento simplificado do cadastro de pacientes e funcionários da institu
 
 ## :black_nib: Autores
 
-- [@darkiane](https://github.com/darkiane) - Front-end e banco de dados
+- [@Darkiane22](https://github.com/Darkiane22) - Front-end e banco de dados
 - [@LucasLins13](https://github.com/LucasLins13) - Banco de dados
 - [@luizeduardo-yk](https://github.com/luizeduardo-yk) - Front-end e back-end
 - [@nadhon](https://github.com/nadhon) - Back-end
 - [@PedroGuilhermeYS](https://github.com/PedroGuilhermeYS) - Back-end
-- [@Tulio](https://github.com/tulio) - Back-end
+- [@TulioLins](https://github.com/TulioLins) - Back-end
