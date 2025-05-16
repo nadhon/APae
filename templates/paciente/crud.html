@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}CRUD Paciente{% endblock %}
+{% block content %}
+<h2>Pacientes</h2>
+<button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#novoPacienteModal">Novo Paciente</button>
+<table class="table">
+  <thead><tr><th>ID</th><th>Nome</th><th>Idade</th><th>Email</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for p in pacientes %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.nome }}</td>
+      <td>{{ p.idade }}</td>
+      <td>{{ p.email }}</td>
+      <td><a href="{{ url_for('paciente_routes.delete', id=p.id) }}" class="btn btn-danger btn-sm">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="modal fade" id="novoPacienteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="POST" action="{{ url_for('paciente_routes.create') }}">
+      <div class="modal-header"><h5 class="modal-title">Novo Paciente</h5></div>
+      <div class="modal-body">
+        <input name="nome" placeholder="Nome" class="form-control">
+        <input name="idade" type="number" placeholder="Idade" class="form-control mt-2">
+        <input name="email" type="email" placeholder="Email" class="form-control mt-2">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
