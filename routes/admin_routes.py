@@ -1,0 +1,28 @@
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from entities.admin import Admin
+from extensions import db
+
+bp = Blueprint('admin_routes', __name__, url_prefix='/admin')
+
+@bp.route('/')
+def index():
+    admins = Admin.query.all()
+    return render_template('admin/crud.html', admins=admins)
+
+@bp.route('/create', methods=['POST'])
+def create():
+    try:
+        new_admin = Admin(username=request.form['username'], password=request.form['password'])
+        db.session.add(new_admin)
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        flash('Erro ao criar admin.')
+    return redirect(url_for('admin_routes.index'))
+
+@bp.route('/delete/<int:id>')
+def delete(id):
+    a = Admin.query.get_or_404(id)
+    db.session.delete(a)
+    db.session.commit()
+    return redirect(url_for('admin_routes.index'))

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}CRUD Admin{% endblock %}
+{% block content %}
+<h2>Admins</h2>
+<button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#novoAdminModal">Novo Admin</button>
+<table class="table">
+  <thead><tr><th>ID</th><th>Usuário</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for a in admins %}
+    <tr>
+      <td>{{ a.id }}</td>
+      <td>{{ a.username }}</td>
+      <td><a href="{{ url_for('admin_routes.delete', id=a.id) }}" class="btn btn-danger btn-sm">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="modal fade" id="novoAdminModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="POST" action="{{ url_for('admin_routes.create') }}">
+      <div class="modal-header"><h5 class="modal-title">Novo Admin</h5></div>
+      <div class="modal-body">
+        <input name="username" placeholder="Usuário" class="form-control">
+        <input name="password" type="password" placeholder="Senha" class="form-control mt-2">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
