@@ -13,8 +13,7 @@
 Este site foi desenvolvido para a disciplina de Projeto Integrador 3,
 sob orientação do professor Ricson Santana, no curso de Análise e Desenvolvimento de Sistemas do IFPE Campus Palmares.
 
-O objetivo do site é tanto oferecer uma vitrine para exposição das atividades da APAE, quanto oferecer um sistema para
-o gerenciamento simplificado do cadastro de pacientes e funcionários da instituição.
+O objetivo do site é tanto oferecer uma vitrine para exposição das atividades da APAE, quanto oferecer um sistema para o gerenciamento simplificado do cadastro de pacientes e funcionários da instituição.
 
 ## :framed_picture: Screenshots  
 
@@ -26,20 +25,20 @@ o gerenciamento simplificado do cadastro de pacientes e funcionários da institu
 
 **Back-end:** Flask
 
-**Banco de dados:** MySQL/PostgreSQL
+**Banco de dados:** SQLite
 
 ## :gear: Funcionalidades  
 
 - Dashboard de administrador;
-- CRUD de pacientes;
+- CRUD de pacientes e funcionários;
 - Upload de laudo no cadastro do paciente;
 - Geração de relatórios à partir de filtros;
 
 ## :black_nib: Autores
 
-- [@Darkiane22](https://github.com/Darkiane22) - Front-end e banco de dados
-- [@LucasLins13](https://github.com/LucasLins13) - Banco de dados
-- [@luizeduardo-yk](https://github.com/luizeduardo-yk) - Front-end e back-end
-- [@nadhon](https://github.com/nadhon) - Back-end
-- [@PedroGuilhermeYS](https://github.com/PedroGuilhermeYS) - Back-end
-- [@TulioLins](https://github.com/TulioLins) - Back-end
+- [@Darkiane22](https://github.com/Darkiane22)
+- [@LucasLins13](https://github.com/LucasLins13)
+- [@luizcodedthat](https://github.com/luizcodedthat)
+- [@nadhon](https://github.com/nadhon)
+- [@PedroGuilhermeYS](https://github.com/PedroGuilhermeYS)
+- [@TulioLins](https://github.com/TulioLins)
