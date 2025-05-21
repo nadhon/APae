@@ -18,13 +18,14 @@ def create_app():
 
     # importa entidades e rotas
     from entities import paciente  # admin já carregado acima
-    from routes import auth, dashboard, admin_routes, paciente_routes
+    from routes import auth, dashboard, admin_routes, paciente_routes, errors
 
     # registra blueprints
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
     app.register_blueprint(admin_routes.bp)
     app.register_blueprint(paciente_routes.bp)
+    app.register_blueprint(errors.errors)
 
     return app
 
