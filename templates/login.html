@@ -1,15 +1,31 @@
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
-{% block content %}
-<form method="POST">
-  <div class="mb-3">
-    <label class="form-label">Usuário</label>
-    <input name="username" class="form-control">
+{% extends 'base.html' %} {% block title %}Login{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+{% block content
+%}
+
+<div class="conteudo">
+  <div class="imagem-lateral"></div>
+  <div class="login-container">
+
+    <div class="titulo">
+      <h1>Bem-vindo(a)</h1>
+      <p>Entre na sua conta para continuar</p>
+    </div>
+
+    <form method="POST">
+      <div class="form-campo">
+        <label class="form-label">Usuário</label>
+        <input name="username" placeholder="Ex.: mariana22" />
+      </div>
+      <div class="form-campo">
+        <label class="form-label">Senha</label>
+        <input name="password" type="password" placeholder="Insira sua senha" />
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
   </div>
-  <div class="mb-3">
-    <label class="form-label">Senha</label>
-    <input name="password" type="password" class="form-control">
-  </div>
-  <button class="btn btn-primary" type="submit">Entrar</button>
-</form>
+</div>
+
 {% endblock %}
