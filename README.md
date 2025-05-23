@@ -17,6 +17,13 @@ O objetivo do site é tanto oferecer uma vitrine para exposição das atividades
 
 ## :framed_picture: Screenshots  
 
+### Home
+![App Screenshot](https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png)
+
+### Login
+![Screenshot da pagina de login](./docs/images/pagina_login.jpg)
+
+### Dashboard
 ![App Screenshot](https://lanecdr.org/wp-content/uploads/2019/08/placeholder.png)
 
 ## :wrench: Tecnologias utilizadas
@@ -25,7 +32,7 @@ O objetivo do site é tanto oferecer uma vitrine para exposição das atividades
 
 **Back-end:** Flask
 
-**Banco de dados:** SQLite
+**Banco de dados:** SQL
 
 ## :gear: Funcionalidades  
 

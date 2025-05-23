@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root, * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Geist', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    --preto: #1E1E1E;
+    --branco: #F2F4F8;
+    --azul-primario: #5D5FEF;
+
+}

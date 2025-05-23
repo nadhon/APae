@@ -1,0 +1,86 @@
+.conteudo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.conteudo .imagem-lateral {
+    width: 50%;
+    height: 100vh;
+    background-image: url(../img/carrossel/slide5.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.conteudo .login-container {
+    width: 50%;
+    height: 100vh;
+    display: grid;
+    box-sizing: border-box;
+    padding: 5rem;
+    align-content: center;
+
+    color: var(--preto);
+    gap: 3rem;
+}
+
+.conteudo .login-container h1 {
+    font-size: 2.625rem;
+}
+
+.conteudo .login-container p {
+    font-size: 0.875rem;
+}
+
+.conteudo form {
+    display: grid;
+    gap: 1rem;
+}
+
+.conteudo .login-container .form-label {
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.conteudo .login-container input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+
+    background-color: #F2F4F8;
+    border: none;
+    border-radius: 0.25rem;
+
+    box-shadow: inset 0 -1px 0 0 #C1C7CD;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.conteudo .login-container input:focus {
+    outline: none;
+    box-shadow: inset 0 -2px 0 0 var(--azul-primario);
+}
+
+.conteudo .login-container input::placeholder {
+    color: #697077;
+}
+
+.conteudo .login-container button {
+    width: 100%;
+    padding: 0.625rem;
+    font-size: 1rem;
+    font-weight: 600;
+
+    background-color: var(--azul-primario);
+    color: var(--branco);
+    border-radius: 0.25rem;
+    border: none;
+
+    transition: background-color 0.2s ease-in-out;
+}
+
+.conteudo .login-container button:hover {
+    cursor: pointer;
+    background-color: #4B4DFE;
+}
