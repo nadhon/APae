@@ -1,0 +1,15 @@
+.erro-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+p {
+    font-style: italic;
+}
+
+.erro-container .icon-central {
+
+    background-image: url(../img/carrossel/slide5.jpg);
+}

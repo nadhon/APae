@@ -3,6 +3,13 @@ from flask_login import login_user, logout_user, login_required
 from entities.admin import Admin
 from extensions import db, login_manager
 
+#import bcrypt
+
+#senhaoriginal = b"senhateste"
+#hashsenha = bcrypt.hashpq(senhaoriginal, bcrypt.gensalt())
+
+#esperando banco de dados para começar os testes com hash...
+
 bp = Blueprint('auth', __name__)
 
 @bp.route('/login', methods=['GET', 'POST'])
