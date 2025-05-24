@@ -7,22 +7,20 @@
 {% block content %}
 
 <div class="superior">
-    <div class="imagem-lateral"></div>
-    
 </div>
 
 <div class="erro-container">
-    <div class="icon-central"></div>
+    <div><img src="static/img/icons/erro_icon.svg" width="60" height="100"></img></div>
     <h1>404</h1>
-    <h1>Página Não Encontrada</h1>
+    <h1>Página Não Encontrada</h1><br><br>
 
     <p>Opa! Parece que você se perdeu. Não conseguimos encontrar a página que você procurando</p>
-    <p>Clique no botão abaixo para voltar em segurança!</p>
+    <p>Clique no botão abaixo para voltar em segurança!</p><br><br>
 
-    <a href="/">Voltar para a página inicial</a>
+    <div class="voltar-container">
+        <a href="/" class="voltar-botao">Voltar ao início</a>
+    </div>
 
 </div>
-
-
 
 {% endblock %}
