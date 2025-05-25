@@ -26,6 +26,10 @@
         <input name="idade" type="number" placeholder="Idade" class="form-control mt-2">
         <input name="email" type="email" placeholder="Email" class="form-control mt-2">
       </div>
+      <form action="{{ url_for('paciente_routes.create') }}" method="POST">
+        <div class="modal-body">
+          <input type="file" name="arquivo" required>
+        </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Salvar</button>
       </div>

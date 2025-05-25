@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+import os
+from flask import send_from_directory
 from entities.paciente import Paciente
 from extensions import db
 
@@ -23,6 +25,24 @@ def create():
         db.session.rollback()
         flash('Erro ao criar paciente.')
     return redirect(url_for('paciente_routes.index'))
+@bp.route('/upload', methods=['POST'])
+def upload():
+    arquivo = request.files.get('arquivo')
+    if arquivo and arquivo.filename.lower().endswith('.pdf'):
+        upload_folder = os.path.join('template', 'paciente', 'uploads')
+        os.makedirs(upload_folder, exist_ok=True)
+        pdf_filename = arquivo.filename
+        caminho = os.path.join(upload_folder, arquivo.filename)
+        arquivo.save(caminho)
+        flash('Arquivo enviado com sucesso.')
+    else:
+        flash('Nenhum arquivo enviado.')
+    return redirect(url_for('paciente_routes.index'))
+uploaded_files = [] 
+@bp.route('/download/<filename>')
+def download(filename):
+    upload_folder = os.path.join('template', 'paciente', 'uploads')
+    return send_from_directory(upload_folder, filename, as_attachment=True)
 
 @bp.route('/delete/<int:id>')
 def delete(id):
