@@ -25,16 +25,26 @@ def create():
         db.session.rollback()
         flash('Erro ao criar paciente.')
     return redirect(url_for('paciente_routes.index'))
+
+def allowed_file(filename):
+    raise NotImplementedError
+
+def secure_filename(filename):
+    raise NotImplementedError
+
 @bp.route('/upload', methods=['POST'])
 def upload():
-    arquivo = request.files.get('arquivo')
-    if arquivo and arquivo.filename.lower().endswith('.pdf'):
-        upload_folder = os.path.join('template', 'paciente', 'uploads')
-        os.makedirs(upload_folder, exist_ok=True)
-        pdf_filename = arquivo.filename
-        caminho = os.path.join(upload_folder, arquivo.filename)
-        arquivo.save(caminho)
-        flash('Arquivo enviado com sucesso.')
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('Nenhum arquivo selecionado.')
+            return redirect(url_for('paciente_routes.index'))
+        file = request.files['file']
+        if file.filename == '':
+            flash('Nenhum arquivo selecionado.')
+            return redirect(url_for('paciente_routes.index'))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     else:
         flash('Nenhum arquivo enviado.')
     return redirect(url_for('paciente_routes.index'))
