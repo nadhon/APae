@@ -1,32 +1,56 @@
 .erro-container {
-    padding: 0;
-    margin: 0;
-    height: 70vh;
+    padding: 5rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
     flex-direction: column;
-    font-family: Arial, sans-serif
     
+    gap: 3rem;
+
+    color: var(--preto)
+}
+
+.erro-container h1 {
+  font-size: 3.375rem;
+  line-height: 110%;
+}
+
+.erro-container h2 {
+  font-size: 2.625rem;
+  line-height: 110%;
+}
+
+.erro-container p {
+  line-height: 140%;
+}
+
+.erro-container .erro-icone img {
+  width: 6rem;
+  color: #C1C7CD;
+}
+
+.erro-container .mensagem-erro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .voltar-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
 }
 
 .voltar-botao {
-  background-color: #5a5af4; /* cor azul */
-  color: white;
+  background-color: var(--azul-primario);
+  color: var(--branco);
   padding: 10px 20px;
   text-decoration: none;
-  border-radius: 8px; /* bordas arredondadas */
+  border-radius: 5px;
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
 
 .voltar-botao:hover {
-  background-color: #4848d1; /* cor mais escura no hover */
+  background-color: #4B4DFE;
 }

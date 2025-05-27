@@ -6,16 +6,22 @@
 {% endblock %}
 {% block content %}
 
-<div class="superior">
-</div>
-
+<!--    Adicionar containers diferentes para texto header e texto simples (p)    -->
 <div class="erro-container">
-    <div><img src="static/img/icons/erro_icon.svg" width="60" height="100"></img></div>
-    <h1>404</h1>
-    <h1>Página Não Encontrada</h1><br><br>
+    <div class="erro-icone"><img src="{{ url_for('static', filename='img/icons/toys_fan.svg') }}"></div>
+    <div class="mensagem-erro">
 
-    <p>Opa! Parece que você se perdeu. Não conseguimos encontrar a página que você procurando</p>
-    <p>Clique no botão abaixo para voltar em segurança!</p><br><br>
+        <div class="erro-header">
+            <h1>404</h1>
+            <h2>Página Não Encontrada</h1>
+        </div>
+
+        <div class="texto-retorno">
+            <p>Opa! Parece que você se perdeu. Não conseguimos encontrar a página que você está procurando.</p>
+            <p>Clique no botão abaixo para voltar à segurança!</p>
+        </div>
+
+    </div>
 
     <div class="voltar-container">
         <a href="/" class="voltar-botao">Voltar ao início</a>
