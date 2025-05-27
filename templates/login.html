@@ -1,57 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/base.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/login.css') }}"
-    />
-    <title>Login</title>
-  </head>
-  <body>
-    <div class="conteudo">
-      <div class="imagem-lateral"></div>
+{% extends 'base.html' %} {% block title %}Login{% endblock %} {% block styles
+%}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/login.css') }}"
+/>
+{% endblock %} {% block content %}
 
-      <div class="login-container">
-        <div class="login-bloco titulo">
-          <h1>Bem-vindo(a)</h1>
-          <p>Entre na sua conta para continuar</p>
-        </div>
+<div class="conteudo">
+  <div class="imagem-lateral"></div>
 
-        <form class="login-bloco" method="POST">
-          {% with messages = get_flashed_messages() %} {% if messages %} {% for
-          m in messages %}
-          <div class="alerta">{{ m }}</div>
-          {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock
-          %}
-          <div class="form-campo">
-            <label class="form-label" for="username">Usuário</label>
-            <input id="username" name="username" placeholder="Ex.: mariana22" required />
-          </div>
-          <div class="form-campo">
-            <label class="form-label" for="password">Senha</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Insira sua senha"
-              required
-            />
-          </div>
-          <button type="submit">Entrar</button>
-        </form>
-
-        <div class="login-bloco">
-          <a href="/" class="voltar-link"
-            ><span class="material-symbols-rounded"> arrow_back</span> Voltar</a
-          >
-        </div>
-      </div>
+  <div class="login-container">
+    <div class="login-bloco titulo">
+      <h1>Bem-vindo(a)</h1>
+      <p>Entre na sua conta para continuar</p>
     </div>
-  </body>
-</html>
+
+    <form class="login-bloco" method="POST">
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for m in
+      messages %}
+      <div class="alerta">{{ m }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+      <div class="form-campo">
+        <label class="form-label" for="username">Usuário</label>
+        <input
+          id="username"
+          name="username"
+          placeholder="Ex.: mariana22"
+          required
+        />
+      </div>
+      <div class="form-campo">
+        <label class="form-label" for="password">Senha</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Insira sua senha"
+          required
+        />
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="login-bloco">
+      <a href="/" class="voltar-link"
+        ><span class="material-symbols-rounded"> arrow_back</span> Voltar</a
+      >
+    </div>
+  </div>
+</div>
+
+{% endblock %}

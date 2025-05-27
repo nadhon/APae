@@ -20,7 +20,7 @@ def login():
             login_user(user)
             return redirect(url_for('dashboard.dashboard'))
         flash('Usuário ou senha inválidos.')
-    return render_template('login.html')
+    return render_template('login.html', show_footer_and_nav=False)
 
 @bp.route('/logout')
 @login_required
