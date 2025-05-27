@@ -1,61 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Meu Site{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-  {% block styles %}
-  {% endblock %}
-  {% block scripts %}
-  {% endblock %}
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url_for('dashboard.home') }}">Home</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
-        {% if current_user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
-        {% else %}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container mt-4">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      {% for m in messages %}
-        <div class="alert alert-warning">{{ m }}</div>
-      {% endfor %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Meu Site{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    {% if show_footer_and_nav %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     {% endif %}
-  {% endwith %}
-  {% block content %}{% endblock %}
-<footer>
-    <div class="footer-container">
-        <div class="imagem-apae"><h4 class="nome-image-apae">APAE Palmares</h4></div>
+    {% block styles %} {% endblock %} {% block scripts %} {% endblock %}
+  </head>
+  <body>
 
-        <div class="icones-sociais">
-            <a href="https://www.instagram.com/apaebrasil/"><img src="static/img/icons/instagram-svgrepo-com (1).svg" width="30"></a>
-            <a href="https://www.facebook.com/apaebrasil/"><img src="static/img/icons/facebook-svgrepo-com (1).svg" width="30"></a>
-            <a href="https://x.com/brasilfenapaes"><img src="static/img/icons/icons8-x.svg" width="30"></a>
-            <a href="https://www.youtube.com/@ApaeBrasilOficial/videos"><img src="static/img/icons/youtube-168-svgrepo-com.svg" width="30"></a>
+      {% if show_footer_and_nav %}
+        {% include "partials/navbar.html" %}
+      {% endif %}
+    <div class="container">
+      <!-- Inserir isso aqui nas páginas que não estendem base.html (como login.html e dashboard.html) -->
+      <!-- Também estilizar aqui -->
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for m in
+      messages %}
+      <div class="alerta">{{ m }}</div>
+      {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
 
-        </div> 
-        <div class="central">
-            <a href="#" >Contato</a>
-            <a href="https://apaebrasil.org.br/conteudo/quem-somos" >Sobre</a>
-        </div>
-
-        <p class="épaia">APAE Palmares. Todos os direitos reservados.</p>
+      {% if show_footer_and_nav %}
+        {% include "partials/footer.html" %}
+      {% endif %}
     </div>
-</footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ url_for('static', filename='js/modals.js') }}"></script>
-</body>
+  </body>
 </html>
