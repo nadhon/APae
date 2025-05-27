@@ -31,6 +31,7 @@
           <input type="file" name="arquivo" required>
         </div>
       <div class="modal-footer">
+        <form action="{{ url_for('paciente_routes.create')}}" method="POST">
         <button type="submit" class="btn btn-primary">Salvar</button>
       </div>
     </form>

@@ -1,10 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
 import os
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask import send_from_directory
+from werkzeug.utils import secure_filename
 from entities.paciente import Paciente
 from extensions import db
 
 bp = Blueprint('paciente_routes', __name__, url_prefix='/paciente')
+UPLOAD_FODER = 'templates\paciente\uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 @bp.route('/')
 def index():
@@ -32,29 +35,32 @@ def allowed_file(filename):
 def secure_filename(filename):
     raise NotImplementedError
 
-@bp.route('/upload', methods=['POST'])
-def upload():
+@bp.route('/upload', methods=['GET','POST'])
+def allowed_file(filename):
+    if '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        return True
+    return False
+@bp.route('/upload', methods=['GET','POST'])
+def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('Nenhum arquivo selecionado.')
-            return redirect(url_for('paciente_routes.index'))
+            return redirect(request.url)
         file = request.files['file']
         if file.filename == '':
             flash('Nenhum arquivo selecionado.')
-            return redirect(url_for('paciente_routes.index'))
+            return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    else:
-        flash('Nenhum arquivo enviado.')
-    return redirect(url_for('paciente_routes.index'))
-uploaded_files = [] 
+            upload_folder = os.path.join('template', 'paciente', 'uploads')
+            file.save(os.path.join(upload_folder, filename))
+            flash('Arquivo enviado com sucesso!')
+            return redirect(url_for('paciente_routes.index')) 
 @bp.route('/download/<filename>')
-def download(filename):
-    upload_folder = os.path.join('template', 'paciente', 'uploads')
-    return send_from_directory(upload_folder, filename, as_attachment=True)
+def download_file(name):
+    return send_from_directory(bp.config["UPLOAD_FOLDER"], name)
 
-@bp.route('/delete/<int:id>')
+@bp.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
     p = Paciente.query.get_or_404(id)
     db.session.delete(p)
