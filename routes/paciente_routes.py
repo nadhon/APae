@@ -55,7 +55,8 @@ def upload_file():
             upload_folder = os.path.join('template', 'paciente', 'uploads')
             file.save(os.path.join(upload_folder, filename))
             flash('Arquivo enviado com sucesso!')
-            return redirect(url_for('paciente_routes.index')) 
+            return redirect(url_for('paciente_routes.index'))
+    return render_template('paciente/crud.html') 
 @bp.route('/download/<filename>')
 def download_file(name):
     return send_from_directory(bp.config["UPLOAD_FOLDER"], name)
