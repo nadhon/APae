@@ -9,27 +9,27 @@
       href="{{ url_for('static', filename='css/base.css') }}"
     />
     {% if show_footer_and_nav %}
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-    {% endif %}
-    {% block styles %} {% endblock %} {% block scripts %} {% endblock %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/footer.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    {% endif %} {% block styles %} {% endblock %} {% block scripts %} {%
+    endblock %}
   </head>
   <body>
-
-      {% if show_footer_and_nav %}
-        {% include "partials/navbar.html" %}
-      {% endif %}
+    {% if show_footer_and_nav %} {% include "partials/navbar.html" %} {% endif
+    %}
     <div class="container">
       <!-- Inserir isso aqui nas páginas que não estendem base.html (como login.html e dashboard.html) -->
       <!-- Também estilizar aqui -->
-      {% with messages = get_flashed_messages() %} {% if messages %} {% for m in
-      messages %}
-      <div class="alerta">{{ m }}</div>
-      {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
-
-      {% if show_footer_and_nav %}
-        {% include "partials/footer.html" %}
-      {% endif %}
+      {% block alertas %}{% endblock %} {% block content
+      %}{% endblock %}
     </div>
+    {% if show_footer_and_nav %} {% include "partials/footer.html" %} {% endif
+    %}
   </body>
 </html>
