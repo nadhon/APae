@@ -1,13 +1,12 @@
-import os
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask import send_from_directory
 from werkzeug.utils import secure_filename
+import os
 from entities.paciente import Paciente
 from extensions import db
 
-bp = Blueprint('paciente_routes', __name__, url_prefix='/paciente')
-UPLOAD_FODER = 'templates\paciente\uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+bp = Blueprint('paciente_routes', __name__, url_prefix='/paciente' )
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'docx', 'doc', 'txt'}
+
 
 @bp.route('/')
 def index():
@@ -16,54 +15,37 @@ def index():
 
 @bp.route('/create', methods=['POST'])
 def create():
-    try:
-        novo = Paciente(
-            nome=request.form['nome'],
-            idade=int(request.form['idade']),
-            email=request.form['email']
-        )
-        db.session.add(novo)
-        db.session.commit()
-    except Exception:
-        db.session.rollback()
-        flash('Erro ao criar paciente.')
+    nome = request.form['nome']
+    idade = int(request.form['idade'])
+    email = request.form['email']
+    arquivo = request.files.get('arquivo')
+    filename= None
+    if arquivo and allowed_file(arquivo.filename): # type: ignore
+        filename = secure_filename(arquivo.filename)
+        upload_folder = current_app.config['UPLOAD_FOLDER'] # type: ignore
+        os.makedirs(upload_folder, exist_ok=True)
+        arquivo.save(os.path.join(upload_folder, filename))
+    novo = Paciente(nome=nome, idade=idade, email=email, arquivo=filename)
+    db.session.add(novo)
+    db.session.commit()
+    flash('Paciente adicionado com sucesso!')
     return redirect(url_for('paciente_routes.index'))
-
-def allowed_file(filename):
-    raise NotImplementedError
-
-def secure_filename(filename):
-    raise NotImplementedError
-
-@bp.route('/upload', methods=['GET','POST'])
-def allowed_file(filename):
-    if '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
-        return True
-    return False
-@bp.route('/upload', methods=['GET','POST'])
-def upload_file():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('Nenhum arquivo selecionado.')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('Nenhum arquivo selecionado.')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            upload_folder = os.path.join('template', 'paciente', 'uploads')
-            file.save(os.path.join(upload_folder, filename))
-            flash('Arquivo enviado com sucesso!')
-            return redirect(url_for('paciente_routes.index'))
-    return render_template('paciente/crud.html') 
 @bp.route('/download/<filename>')
-def download_file(name):
-    return send_from_directory(bp.config["UPLOAD_FOLDER"], name)
-
+def download_file(filename):
+    try:
+        return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename, as_attachment=True) # type: ignore
+    except FileNotFoundError:
+        flash('Arquivo não encontrado.', 'error')
+        return redirect(url_for('paciente_routes.index'))
+    
 @bp.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
     p = Paciente.query.get_or_404(id)
+    if p.arquivo:
+        arquivo_path = os.path.join(current_app.config['UPLOAD_FOLDER'], p.arquivo) # type: ignore
+        if os.path.exists(arquivo_path):
+            os.remove(arquivo_path)
     db.session.delete(p)
     db.session.commit()
+    flash('Paciente removido com sucesso!')
     return redirect(url_for('paciente_routes.index'))

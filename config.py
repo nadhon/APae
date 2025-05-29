@@ -5,3 +5,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'postgresql://postgres:123@localhost:5432/postgres'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    UPLOAD_FOLDER = os.path.join(os.getcwd(), 'app', 'static', 'uploads')
