@@ -1,0 +1,51 @@
+
+section {
+    box-sizing: border-box;
+    min-height: 900px;
+
+    padding: 5rem;
+}
+
+#frontpage {
+    margin-top: -80px;
+    background-image: url('../img/carrossel/slide6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+nav:hover {
+  background-color: #fff;
+}
+
+.puzzle-icon-um {
+    background-image: url('../img/icons/puzzle.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50rem;
+    height: 50rem;
+
+    position: fixed;
+    top: -15rem;
+    left: -20rem;
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+
+}
+
+.puzzle-icon-dois {
+    background-image: url('../img/icons/puzzle.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10rem;
+    height: 10rem;
+
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: -1;
+
+    transform: rotate(270deg);  
+    animation: float 15s ease-in-out infinite;
+}
