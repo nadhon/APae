@@ -7,7 +7,7 @@ bp = Blueprint('admin_routes', __name__, url_prefix='/admin')
 @bp.route('/')
 def index():
     admins = Admin.query.all()
-    return render_template('admin/crud.html', admins=admins)
+    return render_template('admin/crud.html', admins=admins, show_footer_and_nav=False)
 
 @bp.route('/create', methods=['POST'])
 def create():
