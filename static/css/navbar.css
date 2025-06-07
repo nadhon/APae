@@ -41,6 +41,7 @@ nav .logo-apae img {
 .nav-links a {
   color: var(--preto);
   vertical-align: middle;
+  font-weight: 600;
 }
 
 .login-links {
