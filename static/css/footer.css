@@ -1,9 +1,6 @@
-/* refatorar essas posições aboslutaskkk */
-
 footer {
   background-color: var(--azul-primario);
   color: var(--branco);
-  padding: 25.5px 20px;
   font-family: sans-serif;
   padding: 1.5rem 5rem 3rem 5rem;
   box-sizing: border-box;
@@ -57,5 +54,3 @@ footer {
 .texto-direitos {
   text-align: center;
 }
-
-
