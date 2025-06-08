@@ -1,101 +1,185 @@
 .conteudo {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .conteudo .imagem-lateral {
-    width: 50%;
-    height: 100vh;
-    background-image: url(../img/carrossel/slide5.jpg);
-    background-size: cover;
-    background-position: center;
+  width: 50%;
+  height: 100vh;
+  background-image: url(../img/carrossel/slide5.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 .conteudo .login-container {
-    width: 50%;
-    height: 100vh;
-    display: grid;
-    box-sizing: border-box;
-    padding: 5rem;
-    align-content: center;
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  display: grid;
+  box-sizing: border-box;
+  padding: 5rem;
+  align-content: center;
 
-    color: var(--preto);
-    gap: 3rem;
+  color: var(--preto);
+  gap: 3rem;
 }
 
 .conteudo .login-container .titulo h1 {
-    font-size: 2.625rem;
+  font-size: 2.625rem;
 }
 
 .conteudo .login-container .titulo p {
-    font-size: 0.875rem;
+  font-size: 0.875rem;
 }
 
 .conteudo form {
-    display: grid;
-    gap: 1rem;
+  display: grid;
+  gap: 1rem;
 }
 
 .conteudo form .form-label {
-    font-size: 0.875rem;
-    display: block;
-    margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .conteudo form input {
-    box-sizing: border-box;
-    width: 100%;
-    padding: .75rem 1rem;
-    font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
 
-    background-color: #F2F4F8;
-    border: none;
-    border-radius: 0.25rem;
+  background-color: #f2f4f8;
+  border: none;
+  border-radius: 0.25rem;
 
-    box-shadow: inset 0 -1px 0 0 #C1C7CD;
-    transition: box-shadow 0.2s ease-in-out;
+  box-shadow: inset 0 -1px 0 0 #c1c7cd;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .conteudo form input:focus {
-    outline: none;
-    box-shadow: inset 0 -2px 0 0 var(--azul-primario);
+  outline: none;
+  box-shadow: inset 0 -2px 0 0 var(--azul-primario);
 }
 
 .conteudo form input::placeholder {
-    color: #697077;
+  color: #697077;
 }
 
 .conteudo form button {
-    width: 100%;
-    padding: 0.625rem;
-    font-size: 1rem;
-    font-weight: 600;
+  width: 100%;
+  padding: 0.625rem;
+  font-size: 1rem;
+  font-weight: 600;
 
-    background-color: var(--azul-primario);
-    color: var(--branco);
-    border-radius: 0.25rem;
-    border: none;
+  background-color: var(--azul-primario);
+  color: var(--branco);
+  border-radius: 0.25rem;
+  border: none;
 
-    transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .conteudo form button:hover {
-    cursor: pointer;
-    background-color: #4B4DFE;
+  cursor: pointer;
+  background-color: #4b4dfe;
 }
 
 .conteudo .login-bloco .voltar-link {
-    text-decoration: none;
-    color: #7879F1;
-    font-size: 0.875rem;
-    font-weight: 600;
+  text-decoration: none;
+  color: var(--azul-links);
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 /* Reestilizar. Usar cores melhores. Talvez vermelho? */
 .alerta {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.puzzle-icon-um {
+  background-image: url("../img/icons/helicopter.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  min-width: 8rem;
+  width: 20%;
+  height: 20%;
+
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  z-index: -1;
+
+  transform: rotate(-20deg);
+  animation: flutuar-helicoptero 8s ease-in-out infinite,
+    movimento-helicoptero 14s ease-in-out infinite;
+}
+
+.puzzle-icon-dois {
+  background-image: url("../img/icons/pipa.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  min-width: 8rem;
+  width: 20%;
+  height: 20%;
+
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: -1;
+
+  animation: flutuar-pipa 10s ease-in-out infinite,
+    movimento-pipa 12s ease-in-out infinite;
+}
+
+@keyframes flutuar-pipa {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+@keyframes movimento-pipa {
+  0% {
+    right: 1rem;
+  }
+  50% {
+    right: 5%;
+  }
+  100% {
+    right: 1rem;
+  }
+}
+
+@keyframes flutuar-helicoptero {
+  0% {
+    transform: translateY(0) rotate(-20deg);
+  }
+  50% {
+    transform: translateY(10%) rotate(-20deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-20deg);
+  }
+}
+
+@keyframes movimento-helicoptero {
+  0% {
+    left: 1rem;
+  }
+  50% {
+    left: 10%;
+  }
+  100% {
+    left: 1rem;
+  }
 }
