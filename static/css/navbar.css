@@ -1,0 +1,67 @@
+nav {
+  position: relative;
+  height: 5rem;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 5rem;
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+
+nav li {
+  list-style: none;
+}
+
+nav li a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav .logo-apae {
+  display: flex;
+  align-items: center;
+}
+
+nav .logo-apae img {
+  width: 3rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  color: var(--preto);
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.login-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.login-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  color: var(--branco);
+  background-color: var(--azul-primario);
+  padding: 0.25rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-links a:hover {
+  cursor: pointer;
+  background-color: #4b4dfe;
+}

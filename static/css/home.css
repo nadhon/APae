@@ -1,0 +1,169 @@
+nav:hover {
+  background-color: #fff;
+}
+
+section {
+    box-sizing: border-box;
+    min-height: 900px;
+
+    padding: 5rem;
+}
+
+#frontpage {
+    margin-top: -80px;
+    background-image: url('../img/carrossel/slide6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+#sobre-nos {
+    color: var(--preto);
+}
+
+#sobre-nos .sobre-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 1200px;
+
+
+    gap: 1rem;
+}
+
+#sobre-nos h1 {
+    font-size: 2.625rem;
+}
+
+#sobre-nos .sobre-head p {
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.puzzle-icon-um {
+    background-image: url('../img/icons/puzzle.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50rem;
+    height: 50rem;
+
+    position: fixed;
+    top: -15rem;
+    left: -20rem;
+    z-index: -1;
+    animation: float 20s ease-in-out infinite;
+
+}
+
+.puzzle-icon-dois {
+    background-image: url('../img/icons/puzzle.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18rem;
+    height: 18rem;
+
+    position: fixed;
+    bottom: 0;
+    right: -1rem;
+    z-index: -1;
+
+    transform: rotate(270deg);  
+    animation: float 15s ease-in-out infinite;
+}
+
+#sobre-nos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 2.375rem;
+}
+
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    gap: 1.625rem;
+
+}
+
+.card .material-symbols-rounded {
+    font-size: 3.5rem;
+}
+
+.card-inclusao .material-symbols-rounded {
+    color: #6FB055;
+}
+
+.card-respeito .material-symbols-rounded {
+    color: #FBBA00;
+}
+
+.card-comprometimento .material-symbols-rounded {
+    color: var(--azul-primario);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 16rem;
+    min-height: 13.5rem;
+
+    padding: 2.25rem 1.625rem;
+
+    border-radius: 1.25rem;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    background-color: var(--branco);
+    background-color: #fff;
+
+    color: var(--preto);
+}
+
+.card h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-inclusao h4 {
+    color: #6FB055;
+}
+
+.card-respeito h4 {
+    color: #FBBA00;
+}
+
+.card-comprometimento h4 {
+    color: var(--azul-primario);
+}
+
+.embeds {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+}
+
+iframe {
+    width: 100px;
+    display: inline-block;
+}
+
