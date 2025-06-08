@@ -15,6 +15,11 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return Admin.query.get(int(user_id))
+    
+    # injeta visibilidade do rodapé e navegação
+    @app.context_processor
+    def inject_footer_and_nav_visibility():
+        return dict(show_footer_and_nav=True)
 
     # importa entidades e rotas
     from entities import paciente  # admin já carregado acima
