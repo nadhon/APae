@@ -10,7 +10,7 @@ from extensions import db, login_manager
 
 #esperando banco de dados para começar os testes com hash...
 
-bp = Blueprint('auth', __name__)
+bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
