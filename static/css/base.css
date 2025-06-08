@@ -47,3 +47,13 @@ body {
 
   color: var(--preto);
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.conteudo-principal {
+  flex: 1;
+}
