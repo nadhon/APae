@@ -1,45 +1,105 @@
 {% extends 'base.html' %}
-{% block title %}CRUD Paciente{% endblock %}
-{% block scripts %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pacientes-cadastro.css') }}" />
+{% endblock %}
+
 {% block content %}
-<h2>Pacientes</h2>
-<table class="table">
-  <thead><tr><th>ID</th><th>Nome</th><th>Idade</th><th>Email</th><th>Ações</th></tr></thead>
-  <tbody>
-    {% for p in pacientes %}
-    <tr>
-      <td>{{ p.id }}</td>
-      <td>{{ p.nome }}</td>
-      <td>{{ p.idade }}</td>
-      <td>{{ p.email }}</td>
-      <td>
-        <form method="POST" action="{{ url_for('paciente_routes.delete', id=p.id) }}" class="d-inline">
-          <button type="submit" class="btn btn-danger">Excluir</button>
-        </form>
-      </td>
-      </tr>
+{# Definição das etapas #}
+{% set steps = ['Identificação', 'Documentos', 'Saúde', 'Contatos', 'Família'] %}
+{% set current_step = 1 %}
+
+{% include "partials/sidebar.html" %}
+
+<main class="dashboard-conteudo">
+
+  <h1>Cadastro de paciente</h1>
+
+  <div class="dashboard-form">
+
+    {# Navegação das etapas #}
+    <ul class="etapas">
+      {% for step_name in steps %}
+      <li {% if loop.index==current_step %}class="etapa-ativa" {% endif %}>
+        {{ loop.index }}. {{ step_name }}
+      </li>
       {% endfor %}
-    </tbody>
-  </table>
-  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#novoPacienteModal">Novo Paciente</button>
-<div class="modal fade" id="novoPacienteModal" tabindex="-1">
-  <div class="modal-dialog">
-    <form class="modal-content" method="POST" action="{{ url_for('paciente_routes.create') }}">
-      <div class="modal-header"><h5 class="modal-title">Novo Paciente</h5></div>
-      <div class="modal-body">
-        <input name="nome" placeholder="Nome" class="form-control">
-        <input name="idade" type="number" placeholder="Idade" class="form-control mt-2">
-        <input name="email" type="email" placeholder="Email" class="form-control mt-2">
-      </div>
-      <form method="POST" action="{{ url_for('paciente_routes.create') }}" enctype="multipart/form-data">
-        <div class="modal-body">
-          <input type="file" name="arquivo" required>
+    </ul>
+
+    <form method="post" action="">
+      {# Controle da etapa atual #}
+      <input type="hidden" name="current_step" value="{{ current_step }}">
+
+      {# Etapa 1: Identificação #}
+      {% if current_step == 1 %}
+      <h3 class="etapa-titulo">Dados básicos</h3>
+      <div id="etapa-1" class="etapa">
+        <div class="campo">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required>
         </div>
-      <div class="modal-footer">
-        <form action="{{ url_for('paciente_routes.create')}}" method="POST">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+
+        <div class="campo">
+          <label for="nome_social">Nome social: <span class="opcional">(opcional)</span></label>
+          <input type="text" id="nome_social" name="nome_social">
+        </div>
+
+        <div class="campo">
+          <label for="prontuario">Nº prontuário:</label>
+          <input type="text" id="prontuario" name="prontuario" required>
+        </div>
+
+        <div class="campo">
+          <label for="situacao">Situação de cadastro:</label>
+          <select id="situacao" name="situacao" required>
+            <option value="">Selecione...</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+            <option value="pendente">Pendente</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="area">Área de atendimento:</label>
+          <select id="area" name="area" required>
+            <option value="">Selecione...</option>
+            <option>Assistência</option>
+            <option>Avaliação</option>
+            <option>Saúde</option>
+            <option>Lista de espera</option>
+            <option>Educação</option>
+            <option>Atividades complementares</option>
+            <option>Triagem</option>
+          </select>
+        </div>
+
+        <div class="campo datas">
+          <div class="data">
+            <label for="data_entrada">Data de entrada:</label>
+            <input type="date" name="data_entrada" required>
+          </div>
+          <div class="data">
+            <label for="data_saida">Data de saída:</label>
+            <input type="date" name="data_saida">
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {# Controles de navegação #}
+      <div class="botoes-navegacao">
+        <button type="submit" name="action" value="prev" {% if current_step <=1 %}disabled{% endif %}>
+          Anterior
+        </button>
+
+        {% if current_step == steps|length %}
+        <button type="submit" name="action" value="submit">Enviar</button>
+        {% else %}
+        <button type="submit" name="action" value="next">Próximo</button>
+        {% endif %}
       </div>
     </form>
   </div>
-</div>
+</main>
 {% endblock %}

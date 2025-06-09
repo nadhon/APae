@@ -1,0 +1,20 @@
+<aside id="sidebar">
+  <div class="topo">
+    <div class="logo-apae">
+      <img src="{{ url_for('static', filename='img/icons/apae-logo.svg') }}" alt="Logo da APAE">
+      <h3>APAE - Palmares</h3>
+    </div>
+    <ul>
+      <li><a href=""><span class="material-symbols-rounded"> home </span> Início</a></li>
+      <li><a href=""><span class="material-symbols-rounded"> groups </span> Funcionários</a></li>
+      <li><a href=""><span class="material-symbols-rounded"> toys_and_games </span> Pacientes</a></li>
+      <li><a href=""><span class="material-symbols-rounded"> assignment </span> Relatórios</a></li>
+    </ul>
+  </div>
+
+  <a class="botao-sair" href="{{ url_for('auth.logout') }}">
+    <span class="material-symbols-rounded"> logout </span>
+    Sair
+  </a>
+
+</aside>
