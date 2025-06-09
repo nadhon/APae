@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}CRUD Paciente{% endblock %}
-{% block scripts %}
+{% block title %}Lista Pacientes{% endblock %}
 {% block content %}
 <h2>Pacientes</h2>
-<table class="table">
-  <thead><tr><th>ID</th><th>Nome</th><th>Idade</th><th>Email</th><th>Ações</th></tr></thead>
+<a href="{{ url_for('paciente_routes.create') }}" class="btn btn-success mb-3">Novo Paciente</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr><th>ID</th><th>Nome</th><th>Idade</th><th>Email</th><th>Ações</th></tr>
+  </thead>
   <tbody>
     {% for p in pacientes %}
     <tr>
@@ -13,33 +16,15 @@
       <td>{{ p.idade }}</td>
       <td>{{ p.email }}</td>
       <td>
-        <form method="POST" action="{{ url_for('paciente_routes.delete', id=p.id) }}" class="d-inline">
-          <button type="submit" class="btn btn-danger">Excluir</button>
+        <a href="{{ url_for('paciente_routes.editar', id=p.id) }}" class="btn btn-warning btn-sm">Editar</a>
+        <form action="{{ url_for('paciente_routes.delete', id=p.id) }}" method="POST" style="display:inline-block" onsubmit="return confirm('Confirma exclusão?');">
+          <button class="btn btn-danger btn-sm">Excluir</button>
         </form>
       </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#novoPacienteModal">Novo Paciente</button>
-<div class="modal fade" id="novoPacienteModal" tabindex="-1">
-  <div class="modal-dialog">
-    <form class="modal-content" method="POST" action="{{ url_for('paciente_routes.create') }}">
-      <div class="modal-header"><h5 class="modal-title">Novo Paciente</h5></div>
-      <div class="modal-body">
-        <input name="nome" placeholder="Nome" class="form-control">
-        <input name="idade" type="number" placeholder="Idade" class="form-control mt-2">
-        <input name="email" type="email" placeholder="Email" class="form-control mt-2">
-      </div>
-      <form method="POST" action="{{ url_for('paciente_routes.create') }}" enctype="multipart/form-data">
-        <div class="modal-body">
-          <input type="file" name="arquivo" required>
-        </div>
-      <div class="modal-footer">
-        <form action="{{ url_for('paciente_routes.create')}}" method="POST">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
-    </form>
-  </div>
-</div>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="text-center">Nenhum paciente cadastrado.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
