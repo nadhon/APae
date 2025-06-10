@@ -24,28 +24,7 @@
 
 .dashboard-form {
     background-color: #fff;
-}
-
-.etapas {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-
-
-    list-style: none;
-}
-
-.etapas li {
-    box-sizing: border-box;
-    padding: .5rem 1rem;
-    border-top: 3px solid #DDE1E6;
-    flex: 1;
-    font-weight: 500;
-    height: 4rem;
-    cursor: pointer;
-    background-color: #F2F4F8;
-    font-size: .875rem;
+    border-radius: 5px;
 }
 
 form {

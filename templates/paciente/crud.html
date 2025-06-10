@@ -11,7 +11,7 @@
 
   <div class="dashboard-form">
 
-    <form method="post" action="">
+    <form method="post" action=" {{ url_for('paciente_routes.novo') }} ">
 
       <section id="identificacao">
         <h3>Identificação</h3>
@@ -32,8 +32,8 @@
           </select>
         </div>
         <div class="campo">
-          <label for="raca">Raça/Cor:</label>
-          <select id="raca" name="raca" required>
+          <label for="raca_cor">Raça/Cor:</label>
+          <select id="raca_cor" name="raca_cor" required>
             <option value="">Selecione...</option>
             <option value="branca">Branca</option>
             <option value="preta">Preta</option>

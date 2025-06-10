@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin-listagem.css') }}" />
+{% endblock %}
+
+{% include "partials/sidebar.html" %}
+
+{% with messages = get_flashed_messages() %} {% if messages %} {% for m in
+messages %}
+<div class="alerta">{{ m }}</div>
+{% endfor %} {% endif %} {% endwith %}
+
+{% block content %}
+
+  <main class="dashboard-conteudo">
+    <h1>Colaboradores</h1>
+    <p class="subtitulo">Gerencie os colaboradores cadastrados no sistema.</p>
+
+    <div class="topo-listagem">
+      <a href="{{url_for('admin_routes.novo')}}" class="botao-primario">+ Novo Colaborador</a>
+    </div>
+
+    <div class="tabela-container">
+      <table class="tabela-colaboradores">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Cargo</th>
+            <th class="acoes-th">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for admin in admins %}
+            <tr>
+            <td>{{admin.username}}</td>
+            <td>{{admin.email}}</td>
+            <td>{{admin.cargo}}</td>
+            <td class="acoes">
+              <button class="botao-acao editar">Editar</button>
+              <button class="botao-acao excluir">Excluir</button>
+            </td>
+          </tr>
+          {% endfor %}
+
+          <tr>
+            <td>João da Silva</td>
+            <td>joao@email.com</td>
+            <td>Analista</td>
+            <td class="acoes">
+              <button class="botao-acao editar">Editar</button>
+              <button class="botao-acao excluir">Excluir</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Maria Souza</td>
+            <td>maria@email.com</td>
+            <td>Gerente</td>
+            <td class="acoes">
+              <button class="botao-acao editar">Editar</button>
+              <button class="botao-acao excluir">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</main>
+{% endblock %}

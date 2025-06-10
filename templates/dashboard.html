@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
+
 {% block title %}Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% include "partials/sidebar.html" %}
+
 {% block content %}
 
-{% with messages = get_flashed_messages() %} {% if messages %} {% for m in
-messages %}
-<div class="alerta">{{ m }}</div>
-{% endfor %} {% endif %} {% endwith %}
+<main class="dashboard-conteudo">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for m in messages %}
+        <div class="alerta">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
-<h1>Dashboard</h1>
-<ul>
-  <li><a href="{{ url_for('admin_routes.index') }}">Admins</a></li>
-  <li><a href="{{ url_for('paciente_routes.listar') }}">Listar Pacientes</a></li>
-</ul>
+  <h1>Dashboard</h1>
+  <p class="subtitulo">Resumo geral do sistema</p>
+
+  <div class="cards-resumo">
+    <div class="card-resumo">
+      <h2>{{ pacientes|length }}</h2>
+      <p>Pacientes cadastrados</p>
+    </div>
+    <div class="card-resumo">
+      <h2>{{ admins|length }}</h2>
+      <p>Colaboradores cadastrados</p>
+    </div>
+  </div>
+</main>
+
 {% endblock %}

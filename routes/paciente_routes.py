@@ -7,9 +7,13 @@ from entities.mae import Mae
 from entities.pai import Pai
 from entities.responsavel import Responsavel
 from entities.saude import Saude
+from datetime import datetime
 
-bp = Blueprint('paciente_routes', __name__, template_folder='templates/paciente')
+bp = Blueprint('paciente_routes', __name__, template_folder='templates/paciente', url_prefix='/paciente')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'docx', 'doc', 'txt'}
+
+def parse_date(date_str):
+    return datetime.strptime(date_str, '%Y-%m-%d').date() if date_str else None
 
 @bp.route('/')
 def listar():
@@ -23,11 +27,17 @@ def listar():
         query = query.filter(Paciente.cpf.ilike(f"%{filtro_cpf}%"))
 
     pacientes = query.all()
-    return render_template('paciente/crud.html', pacientes=pacientes, show_footer_and_nav=False)
+    return render_template('paciente/listagem.html', pacientes=pacientes, show_footer_and_nav=False)
 
 @bp.route('/novo', methods=['GET', 'POST'])
 def novo():
+
+    if request.method == 'GET':
+        return render_template('paciente/crud.html', show_footer_and_nav=False)
+
     if request.method == 'POST':
+        data_liberacao = parse_date(request.form.get('data_liberacao'))
+
         mae = Mae(
             nome=request.form.get('mae_nome'),
             cpf=request.form.get('mae_cpf'),
@@ -59,7 +69,7 @@ def novo():
             possui_convenio=request.form.get('possui_convenio'),
             qual_convenio=request.form.get('qual_convenio'),
             liberado_atividade_fisica=request.form.get('liberado_af'),
-            data_liberacao=request.form.get('data_liberacao'),
+            data_liberacao=data_liberacao,
             transporte_ida=request.form.get('transporte_ida'),
             transporte_volta=request.form.get('transporte_volta'),
             autorizacao_imagem=request.form.get('autorizacao_imagem'),
@@ -75,18 +85,18 @@ def novo():
             prontuario=request.form.get('prontuario'),
             situacao_cadastro=request.form.get('situacao_cadastro'),
             area_atendimento=request.form.get('area_atendimento'),
-            data_entrada=request.form.get('data_entrada'),
-            data_saida=request.form.get('data_saida'),
+            data_entrada=parse_date(request.form.get('data_entrada')),
+            data_saida=parse_date(request.form.get('data_saida')),
             cpf=request.form.get('cpf'),
             rg=request.form.get('rg'),
-            data_emissao_rg=request.form.get('data_emissao_rg'),
+            data_emissao_rg=parse_date(request.form.get('data_emissao_rg')),
             certidao_nascimento=request.form.get('certidao_nascimento'),
             livro=request.form.get('livro'),
             folha=request.form.get('folha'),
             cartorio=request.form.get('cartorio'),
             naturalidade=request.form.get('naturalidade'),
             sexo=request.form.get('sexo'),
-            data_nascimento=request.form.get('data_nascimento'),
+            data_nascimento=parse_date(request.form.get('data_nascimento')),
             ocupacao=request.form.get('ocupacao'),
             carteira_pcd=request.form.get('carteira_pcd'),
             cartao_nis=request.form.get('cartao_nis'),
@@ -109,7 +119,7 @@ def novo():
             uf=request.form.get('uf'),
             email=request.form.get('email'),
             telefone_residencial=request.form.get('telefone_residencial'),
-            telefone_recado=request.form.get('telefone_recado'),
+            telefone_recados=request.form.get('telefone_recados'),
             pessoa_contato=request.form.get('pessoa_contato'),
             mae_id=mae.id,
             pai_id=pai.id,
@@ -120,7 +130,7 @@ def novo():
         db.session.add(paciente)
         db.session.commit()
         flash("Paciente cadastrado com sucesso!", "success")
-        return redirect(url_for('paciente_routes.index'))
+        return redirect(url_for('paciente_routes.listar'))
 
     return redirect(url_for('paciente_routes.index'))
 
@@ -144,9 +154,3 @@ def deletar(id):
     db.session.commit()
     flash("Paciente removido com sucesso.", "info")
     return redirect(url_for('paciente_routes.index'))
-
-
-
-
-
-

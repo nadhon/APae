@@ -1,0 +1,148 @@
+.conteudo-principal {
+    margin-left: 16rem; /* Compensa a sidebar fixa */
+    display: flex;
+    flex-direction: column; /* Flex colunar para permitir rolagem vertical */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard-conteudo {
+    flex: 1;
+    overflow-y: auto;
+    height: 100vh;
+    padding: 1.5rem;
+    background-color: #F2F4F8;
+    box-sizing: border-box;
+}
+
+.dashboard-conteudo h1 {
+    font-size: 2.625rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--preto);
+}
+
+.subtitulo {
+  font-size: 1rem;
+  color: #697077;
+  margin-bottom: 1.5rem;
+}
+
+.topo-listagem {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.botao-primario {
+  background-color: var(--azul-primario);
+  color: var(--branco);
+  border: none;
+  padding: 0.625rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.botao-primario:hover {
+  background-color: #4b4dfe;
+  cursor: pointer;
+}
+
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela-colaboradores {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-colaboradores th,
+.tabela-colaboradores td {
+  text-align: left;
+  padding: 1rem;
+  color: #202124;
+  border-bottom: 1px solid #dde1e6;
+}
+
+.tabela-colaboradores th {
+  background-color: #f2f4f8;
+  font-weight: 600;
+}
+
+.foto-miniatura {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+}
+
+.badge.ativo {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge.inativo {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.acoes-th,
+.acoes {
+  text-align: right;
+}
+
+.botao-acao {
+  background: none;
+  border: none;
+  color: var(--azul-primario);
+  font-weight: 600;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.botao-acao.editar:hover {
+  text-decoration: underline;
+}
+
+.botao-acao.excluir {
+  color: #d93025;
+}
+
+.botao-acao.excluir:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo para tabelas */
+@media (max-width: 768px) {
+  .tabela-colaboradores th,
+  .tabela-colaboradores td {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .botao-primario {
+    width: 100%;
+  }
+
+  .topo-listagem {
+    justify-content: center;
+  }
+}
