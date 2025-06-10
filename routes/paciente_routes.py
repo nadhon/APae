@@ -12,7 +12,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf', 'docx', 'doc', 'txt'}
 @bp.route('/')
 def index():
     pacientes = Paciente.query.all()
-    return render_template('paciente/crud.html', pacientes=pacientes)
+    return render_template('paciente/crud.html', pacientes=pacientes, show_footer_and_nav=False)
 
 @bp.route('/create', methods=['POST'])
 def create():

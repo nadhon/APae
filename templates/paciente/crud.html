@@ -1,55 +1,60 @@
-{% extends 'base.html' %}
-
-{% block styles %}
+{% extends 'base.html' %} {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pacientes-cadastro.css') }}" />
 {% endblock %}
 
-{% block content %}
-{# Definição das etapas #}
-{% set steps = ['Identificação', 'Documentos', 'Saúde', 'Contatos', 'Família'] %}
-{% set current_step = 1 %}
-
 {% include "partials/sidebar.html" %}
 
+{% block content %}
 <main class="dashboard-conteudo">
-
   <h1>Cadastro de paciente</h1>
 
   <div class="dashboard-form">
 
-    {# Navegação das etapas #}
-    <ul class="etapas">
-      {% for step_name in steps %}
-      <li {% if loop.index==current_step %}class="etapa-ativa" {% endif %}>
-        {{ loop.index }}. {{ step_name }}
-      </li>
-      {% endfor %}
-    </ul>
-
     <form method="post" action="">
-      {# Controle da etapa atual #}
-      <input type="hidden" name="current_step" value="{{ current_step }}">
 
-      {# Etapa 1: Identificação #}
-      {% if current_step == 1 %}
-      <h3 class="etapa-titulo">Dados básicos</h3>
-      <div id="etapa-1" class="etapa">
+      <section id="identificacao">
+        <h3>Identificação</h3>
         <div class="campo">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required>
+          <input type="text" class="campo-texto" id="nome" name="nome" required>
         </div>
-
         <div class="campo">
-          <label for="nome_social">Nome social: <span class="opcional">(opcional)</span></label>
-          <input type="text" id="nome_social" name="nome_social">
+          <label for="nome_social">Nome social:</label>
+          <input type="text" class="campo-texto" id="nome_social" name="nome_social">
         </div>
-
+        <div class="campo">
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" name="sexo" required>
+            <option value="">Selecione...</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="raca">Raça/Cor:</label>
+          <select id="raca" name="raca" required>
+            <option value="">Selecione...</option>
+            <option value="branca">Branca</option>
+            <option value="preta">Preta</option>
+            <option value="parda">Parda</option>
+            <option value="amarela">Amarela</option>
+            <option value="indigena">Indígena</option>
+            <option value="nao_informado">Prefere não informar</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="data_nascimento">Data de nascimento:</label>
+          <input type="date" class="campo-data" id="data_nascimento" name="data_nascimento" required>
+        </div>
+        <div class="campo">
+          <label for="ocupacao">Ocupação:</label>
+          <input type="text" class="campo-texto" id="ocupacao" name="ocupacao">
+        </div>
         <div class="campo">
           <label for="prontuario">Nº prontuário:</label>
-          <input type="text" id="prontuario" name="prontuario" required>
+          <input type="text" class="campo-texto" id="prontuario" name="prontuario" required>
         </div>
-
         <div class="campo">
           <label for="situacao">Situação de cadastro:</label>
           <select id="situacao" name="situacao" required>
@@ -59,7 +64,6 @@
             <option value="pendente">Pendente</option>
           </select>
         </div>
-
         <div class="campo">
           <label for="area">Área de atendimento:</label>
           <select id="area" name="area" required>
@@ -73,33 +77,312 @@
             <option>Triagem</option>
           </select>
         </div>
-
         <div class="campo datas">
           <div class="data">
             <label for="data_entrada">Data de entrada:</label>
-            <input type="date" name="data_entrada" required>
+            <input type="date" class="campo-data" id="data_entrada" name="data_entrada" required>
           </div>
           <div class="data">
             <label for="data_saida">Data de saída:</label>
-            <input type="date" name="data_saida">
+            <input type="date" class="campo-data" id="data_saida" name="data_saida">
           </div>
         </div>
-      </div>
-      {% endif %}
+        <div class="campo">
+          <div class="inline-inputs">
+            <label>Autoriza uso de imagem?</label>
+            <label><input type="radio" name="autoriza_imagem" value="Sim"> Sim</label>
+            <label><input type="radio" name="autoriza_imagem" value="Não"> Não</label>
+            <label><input type="radio" name="autoriza_imagem" value="Não informado"> Não informado</label>
+          </div>
+        </div>
+      </section>
 
-      {# Controles de navegação #}
-      <div class="botoes-navegacao">
-        <button type="submit" name="action" value="prev" {% if current_step <=1 %}disabled{% endif %}>
-          Anterior
-        </button>
+      <section id="documentos">
+        <h3>Documentos</h3>
+        <div class="campo">
+          <label for="cpf">CPF:</label>
+          <input type="text" class="campo-texto" id="cpf" name="cpf" class="campo-cpf" required>
+        </div>
+        <div class="campo">
+          <label for="rg">RG:</label>
+          <input type="text" class="campo-texto" id="rg" name="rg">
+        </div>
+        <div class="campo">
+          <label for="data_emissao_rg">Data emissão RG:</label>
+          <input type="date" class="campo-data" id="data_emissao_rg" name="data_emissao_rg">
+        </div>
+        <div class="campo">
+          <label for="certidao">Nº certidão de nascimento:</label>
+          <input type="text" class="campo-texto" id="certidao" name="certidao">
+        </div>
+        <div class="campo multiplo">
+          <div class="subcampo">
+            <label for="livro">Livro:</label>
+            <input type="text" class="campo-texto" id="livro" name="livro">
+          </div>
 
-        {% if current_step == steps|length %}
-        <button type="submit" name="action" value="submit">Enviar</button>
-        {% else %}
-        <button type="submit" name="action" value="next">Próximo</button>
-        {% endif %}
+          <div class="subcampo">
+            <label for="folha">Folha:</label>
+            <input type="text" class="campo-texto" id="folha" name="folha">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="cartorio">Cartório:</label>
+          <input type="text" class="campo-texto" id="cartorio" name="cartorio">
+        </div>
+        <div class="campo">
+          <label for="naturalidade">Naturalidade:</label>
+          <input type="text" class="campo-texto" id="naturalidade" name="naturalidade" required>
+        </div>
+        <div class="campo">
+          <label for="carteira_pcd">Nº carteira PCD:</label>
+          <input type="text" class="campo-texto" id="carteira_pcd" name="carteira_pcd">
+        </div>
+        <div class="campo">
+          <label for="nis">Nº cartão NIS:</label>
+          <input type="text" class="campo-texto" id="nis" name="nis">
+        </div>
+        <div class="campo">
+          <label for="sus">Nº cartão SUS:</label>
+          <input type="text" class="campo-texto" id="sus" name="sus">
+        </div>
+
+      </section>
+
+      <section id="saude">
+        <h3>Saúde</h3>
+        <div class="campo">
+          <label>Mobilidade:</label>
+          {% for opt in ['Cadeirante','Andador','Órtese','Prótese','Muleta','Bengala','Não faz uso'] %}
+          <label><input type="checkbox" name="mobilidade" value="{{ opt }}"> {{ opt }}</label>
+          {% endfor %}
+        </div>
+        <div class="campo">
+          <label>Tipo de deficiência:</label>
+          {% for opt in ['Visual','Auditiva','Intelectual','Física'] %}
+          <label><input type="checkbox" name="tipo_deficiencia" value="{{ opt }}"> {{ opt }}</label>
+          {% endfor %}
+        </div>
+        <div class="campo">
+          <label>Transtornos:</label>
+          {% for opt in ['TEA','TDAH','AH/SD','Surdocegueira'] %}
+          <label><input type="checkbox" name="transtornos" value="{{ opt }}"> {{ opt }}</label>
+          {% endfor %}
+        </div>
+        <div class="campo">
+          <label for="cid10_1">CID-10:</label>
+          <input type="text" class="campo-texto" id="cid10_1" name="cid10_1" required>
+        </div>
+        {% for i in range(2,5) %}
+        <div class="campo">
+          <label for="cid10_{{ i }}">CID-10 (opcional {{ i-1 }}):</label>
+          <input type="text" class="campo-texto" id="cid10_{{ i }}" name="cid10_{{ i }}">
+        </div>
+        {% endfor %}
+        <div class="campo">
+          <label for="cid11">CID-11:</label>
+          <input type="text" class="campo-texto" id="cid11" name="cid11" required>
+        </div>
+        <div class="campo checkbox-group">
+          <div class="inline-inputs">
+            <label>Utiliza medicamentos?</label>
+            <label><input type="radio" name="usa_medicamentos" value="Sim"> Sim</label>
+            <label><input type="radio" name="usa_medicamentos" value="Não"> Não</label>
+            <label><input type="radio" name="usa_medicamentos" value="Não informado"> Não informado</label>
+          </div>
+          <textarea name="qual_medicamentos" placeholder="Qual? (se Sim)"></textarea>
+        </div>
+        <div class="campo checkbox-group">
+          <div class="inline-inputs">
+            <label>Possui alergia?</label>
+            <label><input type="radio" name="possui_alergia" value="Sim"> Sim</label>
+            <label><input type="radio" name="possui_alergia" value="Não"> Não</label>
+            <label><input type="radio" name="possui_alergia" value="Não informado"> Não informado</label>
+          </div>
+          <textarea name="qual_alergias" placeholder="Qual? (se Sim)"></textarea>
+        </div>
+        <div class="campo checkbox-group">
+          <div class="inline-inputs">
+            <label>Possui comorbidade?</label>
+            <label><input type="radio" name="possui_comorbidade" value="Sim"> Sim</label>
+            <label><input type="radio" name="possui_comorbidade" value="Não"> Não</label>
+            <label><input type="radio" name="possui_comorbidade" value="Não informado"> Não informado</label>
+          </div>
+          <textarea name="qual_comorbidades" placeholder="Qual? (se Sim)"></textarea>
+        </div>
+        <div class="campo checkbox-group">
+          <div class="inline-inputs">
+            <label>Possui convênio médico?</label>
+            <label><input type="radio" name="convenio_medico" value="Sim"> Sim</label>
+            <label><input type="radio" name="convenio_medico" value="Não"> Não</label>
+            <label><input type="radio" name="convenio_medico" value="Não informado"> Não informado</label>
+          </div>
+          <textarea name="qual_convenio" placeholder="Qual? (se Sim)"></textarea>
+
+        </div>
+        <div class="campo checkbox-group">
+          <div class="inline-inputs">
+            <label>Liberado atividade física?</label>
+            <label><input type="radio" name="liberado_atividade" value="Sim"> Sim</label>
+            <label><input type="radio" name="liberado_atividade" value="Não"> Não</label>
+            <label><input type="radio" name="liberado_atividade" value="Não informado"> Não informado</label>
+          </div>
+          <label for="data_liberacao">Data de liberação:</label>
+          <input type="date" class="campo-data" name="data_liberacao" placeholder="Data de liberação (se Sim)">
+        </div>
+        <div class="campo">
+          <label for="meio_transporte_ida">Meio de transporte (ida):</label>
+          <input type="text" name="meio_transporte_ida" id="meio_transporte_ida" class="campo-texto" >
+          </div>
+        <div class="campo">
+          <label for="meio_transporte_volta">Meio de transporte (volta):</label>
+          <input type="text" name="meio_transporte_volta" id="meio_transporte_volta" class="campo-texto" >
+        </div>
+        <div class="campo">
+          <label for="observacoes_saude">Observações:</label>
+          <textarea id="observacoes_saude" name="observacoes_saude"></textarea>
+        </div>
+      </section>
+
+      <section id="contatos">
+        <h3>Contatos</h3>
+        <div class="campo">
+          <label for="cep">CEP:</label>
+          <input type="text" class="campo-texto" id="cep" name="cep" required>
+        </div>
+        <div class="campo">
+          <label for="endereco">Endereço:</label>
+          <input type="text" class="campo-texto" id="endereco" name="endereco" required>
+        </div>
+        <div class="campo multiplo">
+          <div class="subcampo">
+            <label for="numero">Número:</label>
+            <input type="text" class="campo-texto" id="numero" name="numero" required>
+          </div>
+          <div class="subcampo">
+            <label for="complemento">Complemento:</label>
+            <input type="text" class="campo-texto" id="complemento" name="complemento">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="bairro">Bairro:</label>
+          <input type="text" class="campo-texto" id="bairro" name="bairro" required>
+        </div>
+        <div class="campo multiplo">
+          <div class="subcampo">
+            <label for="cidade">Cidade:</label>
+            <input type="text" class="campo-texto" id="cidade" name="cidade" required>
+          </div>
+          <div class="subcampo">
+            <label for="uf">UF:</label>
+            <input type="text" class="campo-texto" id="uf" name="uf" required>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="email">E-mail:</label>
+          <input type="email" class="campo-email" id="email" name="email">
+        </div>
+        <div class="campo multiplo">
+          <div class="subcampo">
+            <label for="telefone_residencial">Telefone residencial:</label>
+            <input type="tel" class="campo-fone" id="telefone_residencial" name="telefone_residencial">
+          </div>
+          <div class="subcampo">
+            <label for="telefone_recados">Telefone recados:</label>
+            <input type="tel" class="campo-fone" id="telefone_recados" name="telefone_recados">
+          </div>
+        </div>
+        <div class="campo">
+          <label for="contato">Pessoa de contato:</label>
+          <input type="text" class="campo-texto" id="contato" name="contato">
+        </div>
+      </section>
+
+      <section id="familia">
+        <h3>Família</h3>
+
+        <fieldset class="grupo-familia">
+          <legend>Dados da Mãe</legend>
+          <div class="campo">
+            <label for="mae_nome">Nome da Mãe:</label>
+            <input type="text" class="campo-texto" id="mae_nome" name="mae_nome" required>
+          </div>
+          <div class="campo">
+            <label for="mae_cpf">CPF da Mãe:</label>
+            <input type="text" class="campo-texto" id="mae_cpf" name="mae_cpf" class="campo-cpf" required>
+          </div>
+          <div class="campo">
+            <label for="mae_telefone">Telefone da Mãe:</label>
+            <input type="tel" class="campo-fone" id="mae_telefone" name="mae_telefone">
+          </div>
+          <div class="campo">
+            <label for="mae_email">E-mail da Mãe:</label>
+            <input type="email" class="campo-email" id="mae_email" name="mae_email">
+          </div>
+          <div class="campo">
+            <label for="mae_ocupacao">Ocupação da Mãe:</label>
+            <input type="text" class="campo-texto" id="mae_ocupacao" name="mae_ocupacao">
+          </div>
+        </fieldset>
+
+        <fieldset class="grupo-familia">
+          <legend>Dados do Pai</legend>
+          <div class="campo">
+            <label for="pai_nome">Nome do Pai:</label>
+            <input type="text" class="campo-texto" id="pai_nome" name="pai_nome">
+          </div>
+          <div class="campo">
+            <label for="pai_cpf">CPF do Pai:</label>
+            <input type="text" class="campo-texto" id="pai_cpf" name="pai_cpf" class="campo-cpf">
+          </div>
+          <div class="campo">
+            <label for="pai_telefone">Telefone do Pai:</label>
+            <input type="tel" class="campo-fone" id="pai_telefone" name="pai_telefone">
+          </div>
+          <div class="campo">
+            <label for="pai_email">E-mail do Pai:</label>
+            <input type="email" class="campo-email" id="pai_email" name="pai_email">
+          </div>
+          <div class="campo">
+            <label for="pai_ocupacao">Ocupação do Pai:</label>
+            <input type="text" class="campo-texto" id="pai_ocupacao" name="pai_ocupacao">
+          </div>
+        </fieldset>
+
+        <fieldset class="grupo-familia">
+          <legend>Dados do Responsável</legend>
+          <div class="campo">
+            <label for="resp_nome">Nome do Responsável:</label>
+            <input type="text" class="campo-texto" id="resp_nome" name="resp_nome">
+          </div>
+          <div class="campo">
+            <label for="resp_cpf">CPF do Responsável:</label>
+            <input type="text" class="campo-texto" id="resp_cpf" name="resp_cpf" class="campo-cpf">
+          </div>
+          <div class="campo">
+            <label for="resp_telefone">Telefone do Responsável:</label>
+            <input type="tel" class="campo-fone" id="resp_telefone" name="resp_telefone">
+          </div>
+          <div class="campo">
+            <label for="resp_email">E-mail do Responsável:</label>
+            <input type="email" class="campo-email" id="resp_email" name="resp_email">
+          </div>
+          <div class="campo">
+            <label for="resp_ocupacao">Ocupação do Responsável:</label>
+            <input type="text" class="campo-texto" id="resp_ocupacao" name="resp_ocupacao">
+          </div>
+        </fieldset>
+
+      </section>
+
+      <div class="acoes">
+        <button type="submit">Enviar</button>
       </div>
     </form>
   </div>
 </main>
 {% endblock %}
+
+{ % block scripts %}
+<script src="{{ url_for('static', filename='js/validacao.js') }}"></script>
+{ % endblock %}
