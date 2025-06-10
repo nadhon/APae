@@ -132,7 +132,7 @@ def novo():
         flash("Paciente cadastrado com sucesso!", "success")
         return redirect(url_for('paciente_routes.listar'))
 
-    return redirect(url_for('paciente_routes.index'))
+    return redirect(url_for('paciente_routes.listar'))
 
 @bp.route('/<int:id>/editar', methods=['GET', 'POST'])
 def editar(id):
@@ -143,9 +143,9 @@ def editar(id):
         paciente.rg = request.form.get('rg')
         db.session.commit()
         flash("Paciente atualizado com sucesso!", "success")
-        return redirect(url_for('paciente_routes.index'))
+        return redirect(url_for('paciente_routes.listar'))
 
-    return redirect(url_for('paciente_routes.index'))
+    return redirect(url_for('paciente_routes.listar'))
 
 @bp.route('/<int:id>/deletar', methods=['POST'])
 def deletar(id):
@@ -153,4 +153,4 @@ def deletar(id):
     db.session.delete(paciente)
     db.session.commit()
     flash("Paciente removido com sucesso.", "info")
-    return redirect(url_for('paciente_routes.index'))
+    return redirect(url_for('paciente_routes.listar'))

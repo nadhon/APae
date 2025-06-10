@@ -28,4 +28,4 @@ def delete(id):
     a = Admin.query.get_or_404(id)
     db.session.delete(a)
     db.session.commit()
-    return redirect(url_for('admin_routes.index'))
+    return redirect(url_for('admin_routes.listar'))
