@@ -5,20 +5,23 @@ from extensions import db
 bp = Blueprint('admin_routes', __name__, url_prefix='/admin')
 
 @bp.route('/')
-def index():
+def listar():
     admins = Admin.query.all()
-    return render_template('admin/crud.html', admins=admins, show_footer_and_nav=False)
+    return render_template('admin/listagem.html', admins=admins, show_footer_and_nav=False)
 
-@bp.route('/create', methods=['POST'])
-def create():
-    try:
-        new_admin = Admin(username=request.form['username'], password=request.form['password'])
-        db.session.add(new_admin)
-        db.session.commit()
-    except Exception:
-        db.session.rollback()
-        flash('Erro ao criar admin.')
-    return redirect(url_for('admin_routes.index'))
+@bp.route('/novo', methods=['GET', 'POST'])
+def novo():
+    if request.method == 'GET':
+        return render_template('admin/crud.html', show_footer_and_nav=False)
+    if request.method == 'POST':
+        try:
+            new_admin = Admin(username=request.form['username'], password=request.form['password'])
+            db.session.add(new_admin)
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            flash('Erro ao criar admin.')
+    return redirect(url_for('admin_routes.listar'))
 
 @bp.route('/delete/<int:id>')
 def delete(id):
