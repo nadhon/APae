@@ -1,1 +1,0 @@
-// Arquivo intencionalmente vazio; Bootstrap lida com modais automaticamente.

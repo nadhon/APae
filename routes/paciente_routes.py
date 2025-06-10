@@ -23,7 +23,7 @@ def listar():
         query = query.filter(Paciente.cpf.ilike(f"%{filtro_cpf}%"))
 
     pacientes = query.all()
-    return render_template('paciente/crud.html', pacientes=pacientes)
+    return render_template('paciente/crud.html', pacientes=pacientes, show_footer_and_nav=False)
 
 @bp.route('/novo', methods=['GET', 'POST'])
 def novo():
