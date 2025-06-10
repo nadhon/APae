@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block styles %}
+{% extends 'base.html' %}
+
+{% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pacientes-listagem.css') }}" />
 {% endblock %}
@@ -6,7 +8,38 @@
 {% include "partials/sidebar.html" %}
 
 {% block content %}
+<main class="dashboard-conteudo">
+  <h1>Lista de Pacientes</h1>
 
+  <!-- Filtros -->
+   <div class="barra-topo">
+    <form class="filtros-form" method="GET" action="{{ url_for('paciente_routes.listar') }}">
+    <div class="campo">
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" placeholder="Filtrar por nome" value="{{ request.args.get('nome', '') }}" class="campo-texto">
+    </div>
+    <div class="campo">
+    <label for="cpf">CPF:</label>
+    <input type="text" name="cpf" placeholder="Filtrar por CPF" value="{{ request.args.get('cpf', '') }}" class="campo-texto">
+    </div>
+    <button type="submit">Filtrar</button>
+  </form>
 
+  <a href="{{ url_for('paciente_routes.novo') }}" class="botao-novo">+ Novo Paciente</a>
+  </div>
 
-{ % endblock %}
+  <!-- Lista de Pacientes -->
+  <ul class="lista-pacientes">
+    {% for paciente in pacientes %}
+      <li class="paciente-item">
+        <strong>Nome:</strong> {{ paciente.nome }}<br>
+        <strong>CPF:</strong> {{ paciente.cpf }}<br>
+        <strong>Prontuário:</strong> {{ paciente.prontuario }}<br>
+        <strong>Data de Entrada:</strong> {{ paciente.data_entrada.strftime('%d/%m/%Y') if paciente.data_entrada else 'Não informada' }}
+      </li>
+    {% else %}
+      <li>Nenhum paciente encontrado.</li>
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}
