@@ -23,14 +23,6 @@
     color: var(--preto);
 }
 
-.barra-topo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
-}
-
 form input {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
@@ -117,7 +109,7 @@ form .botao-filtrar:hover {
   flex-wrap: wrap;
   margin-bottom: 1rem;
   gap: 1rem;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .filtros-form {

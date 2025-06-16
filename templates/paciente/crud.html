@@ -101,7 +101,7 @@
         <h3>Documentos</h3>
         <div class="campo">
           <label for="cpf">CPF:</label>
-          <input type="text" class="campo-texto" id="cpf" name="cpf" class="campo-cpf" maxlength="14" required>
+          <input type="text" id="cpf" name="cpf" class="campo-texto campo-cpf" maxlength="14" required>
         </div>
         <div class="campo">
           <label for="rg">RG:</label>
@@ -309,7 +309,7 @@
           </div>
           <div class="campo">
             <label for="mae_cpf">CPF da Mãe:</label>
-            <input type="text" class="campo-texto" id="mae_cpf" name="mae_cpf" class="campo-cpf" required>
+            <input type="text" id="mae_cpf" name="mae_cpf" class="campo-texto campo-cpf" required>
           </div>
           <div class="campo">
             <label for="mae_telefone">Telefone da Mãe:</label>
@@ -333,7 +333,7 @@
           </div>
           <div class="campo">
             <label for="pai_cpf">CPF do Pai:</label>
-            <input type="text" class="campo-texto" id="pai_cpf" name="pai_cpf" class="campo-cpf">
+            <input type="text" id="pai_cpf" name="pai_cpf" class="campo-texto campo-cpf">
           </div>
           <div class="campo">
             <label for="pai_telefone">Telefone do Pai:</label>
@@ -357,7 +357,7 @@
           </div>
           <div class="campo">
             <label for="resp_cpf">CPF do Responsável:</label>
-            <input type="text" class="campo-texto" id="resp_cpf" name="resp_cpf" class="campo-cpf">
+            <input type="text" id="resp_cpf" name="resp_cpf" class="campo-texto campo-cpf">
           </div>
           <div class="campo">
             <label for="resp_telefone">Telefone do Responsável:</label>
@@ -381,8 +381,4 @@
     </form>
   </div>
 </main>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/validacao.js') }}"></script>
 {% endblock %}
