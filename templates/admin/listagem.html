@@ -43,6 +43,7 @@ messages %}
               <form action="{{ url_for('admin_routes.editar', id=admin.id) }}" method="GET"
               style="display:inline;">
               <button type="submit" class="botao-acao editar">Editar</button>
+              </form>
               <form action="{{ url_for('admin_routes.deletar', id=admin.id) }}" method="POST"
               style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este administrador?');">
               <button type="submit" class="botao-acao excluir">Excluir</button>

@@ -59,6 +59,11 @@ aside {
     color: var(--preto);
     text-decoration: none;
     font-weight: 500;
+    transition: color .3s ease;
+}
+
+.topo ul li a:hover {
+    color: var(--azul-primario);
 }
 
 .botao-sair {
