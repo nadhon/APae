@@ -53,7 +53,7 @@ form input::placeholder {
   color: #697077;
 }
 
-form button {
+form .botao-filtrar {
   padding: 0.625rem 1rem;
   font-size: 1rem;
   font-weight: 600;
@@ -67,7 +67,7 @@ form button {
   transition: color 0.2s ease-in-out;
 }
 
-form button:hover {
+form .botao-filtrar:hover {
   cursor: pointer;
   background-color: #4b4dfe;
 }
@@ -154,7 +154,7 @@ form button:hover {
 }
 
 .botao-novo {
-        display: block;
+    display: block;
     background-color: var(--azul-primario);
     text-decoration: none;
     color: white;
@@ -204,8 +204,10 @@ form button:hover {
 
 .botao-acao.editar {
   color: var(--azul-primario);
+  font-size: 1rem;
 }
 
 .botao-acao.excluir {
   color: #d93025;
+  font-size: 1rem;
 }

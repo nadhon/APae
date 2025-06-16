@@ -3,9 +3,13 @@ from entities.mae import Mae
 from entities.pai import Pai
 from entities.responsavel import Responsavel
 from entities.saude import Saude
+from sqlalchemy.orm import relationship
+from sqlalchemy import JSON
 
 class Paciente(db.Model):
     __tablename__ = 'paciente'
+
+    ativo = db.Column(db.Boolean, default=True)
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150))
@@ -30,9 +34,9 @@ class Paciente(db.Model):
     cartao_nis = db.Column(db.String(50))
     cartao_sus = db.Column(db.String(50))
     raca_cor = db.Column(db.String(30))
-    mobilidade = db.Column(db.String(50))
-    tipo_deficiencia = db.Column(db.String(50))
-    transtornos = db.Column(db.String(50))
+    mobilidade = db.Column(JSON, nullable=True)
+    tipo_deficiencia = db.Column(JSON, nullable=True)
+    transtornos = db.Column(JSON, nullable=True)
     cid10_1 = db.Column(db.String(20))
     cid10_2 = db.Column(db.String(20))
     cid10_3 = db.Column(db.String(20))
@@ -54,3 +58,8 @@ class Paciente(db.Model):
     pai_id = db.Column(db.Integer, db.ForeignKey('pai.id'))
     responsavel_id = db.Column(db.Integer, db.ForeignKey('responsavel.id'))
     saude_id = db.Column(db.Integer, db.ForeignKey('saude.id'))
+
+    mae = relationship('Mae', backref='pacientes')
+    pai = relationship('Pai', backref='pacientes')
+    responsavel = relationship('Responsavel', backref='pacientes')
+    saude = relationship('Saude', backref='pacientes')

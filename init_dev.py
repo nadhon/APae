@@ -16,11 +16,13 @@ with app.app_context():
     # Verifica se já existe um admin de teste
     username = 'admin'
     password = 'admin'
+    email = 'admin@exemplo.com'
+    cargo = 'Administrador'
 
     if Admin.query.filter_by(username=username).first():
         print(f"Usuário admin '{username}' já existe.")
     else:
-        admin = Admin(username=username, password=password)
+        admin = Admin(username=username, password=password, email=email, cargo=cargo)
         db.session.add(admin)
         db.session.commit()
         print(f"Admin de teste criado: {username} / {password}")

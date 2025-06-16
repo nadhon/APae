@@ -12,22 +12,22 @@
   <h1>Cadastro de Administrador</h1>
 
   <div class="dashboard-form">
-    <form method="post" action="{{ url_for('admin_routes.novo') }}">
+    <form method="post" action="{{ url_for('admin_routes.editar', id=admin.id) }}">
       <div class="campo">
         <label for="username">Usuário:</label>
-        <input type="text" class="campo-texto" id="username" name="username" required>
+        <input type="text" class="campo-texto" id="username" name="username" value="{{ admin.username }}" required>
       </div>
       <div class="campo">
         <label for="password">Senha:</label>
-        <input type="password" class="campo-texto" id="password" name="password" required>
+        <input type="password" class="campo-texto" id="password" name="password" value="{{ admin.password }}" required>
       </div>
       <div class="campo">
         <label for="email">Email:</label>
-        <input type="email" class="campo-texto" id="email" name="email">
+        <input type="email" class="campo-texto" id="email" name="email" value="{{ admin.email }}">
       </div>
       <div class="campo">
         <label for="cargo">Cargo:</label>
-        <input type="cargo" class="campo-texto" id="cargo" name="cargo">
+        <input type="cargo" class="campo-texto" id="cargo" name="cargo" value="{{ admin.cargo }}">
       </div>
       <div class="campo">
         <button type="submit" class="botao-submit">Cadastrar</button>

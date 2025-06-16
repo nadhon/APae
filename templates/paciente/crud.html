@@ -56,8 +56,8 @@
           <input type="text" class="campo-texto" id="prontuario" name="prontuario" required>
         </div>
         <div class="campo">
-          <label for="situacao">Situação de cadastro:</label>
-          <select id="situacao" name="situacao" required>
+          <label for="situacao_cadastro">Situação de cadastro:</label>
+          <select id="situacao_cadastro" name="situacao_cadastro" required>
             <option value="">Selecione...</option>
             <option value="ativo">Ativo</option>
             <option value="inativo">Inativo</option>
@@ -65,16 +65,16 @@
           </select>
         </div>
         <div class="campo">
-          <label for="area">Área de atendimento:</label>
-          <select id="area" name="area" required>
+          <label for="area_atendimento">Área de atendimento:</label>
+          <select id="area_atendimento" name="area_atendimento" required>
             <option value="">Selecione...</option>
-            <option>Assistência</option>
-            <option>Avaliação</option>
-            <option>Saúde</option>
-            <option>Lista de espera</option>
-            <option>Educação</option>
-            <option>Atividades complementares</option>
-            <option>Triagem</option>
+            <option value="assistencia">Assistência</option>
+            <option value="avaliacao">Avaliação</option>
+            <option value="saude">Saúde</option>
+            <option value="lista_de_espera">Lista de espera</option>
+            <option value="educacao">Educação</option>
+            <option value="atividades_complementares">Atividades complementares</option>
+            <option value="triagem">Triagem</option>
           </select>
         </div>
         <div class="campo datas">
@@ -89,10 +89,10 @@
         </div>
         <div class="campo">
           <div class="inline-inputs">
-            <label>Autoriza uso de imagem?</label>
-            <label><input type="radio" name="autoriza_imagem" value="Sim"> Sim</label>
-            <label><input type="radio" name="autoriza_imagem" value="Não"> Não</label>
-            <label><input type="radio" name="autoriza_imagem" value="Não informado"> Não informado</label>
+            <label for="autorizacao_imagem">Autoriza uso de imagem?</label>
+            <label><input type="radio" name="autorizacao_imagem" value="Sim"> Sim</label>
+            <label><input type="radio" name="autorizacao_imagem" value="Não"> Não</label>
+            <label><input type="radio" name="autorizacao_imagem" value="Não informado"> Não informado</label>
           </div>
         </div>
       </section>
@@ -101,11 +101,11 @@
         <h3>Documentos</h3>
         <div class="campo">
           <label for="cpf">CPF:</label>
-          <input type="text" class="campo-texto" id="cpf" name="cpf" class="campo-cpf" required>
+          <input type="text" class="campo-texto" id="cpf" name="cpf" class="campo-cpf" maxlength="14" required>
         </div>
         <div class="campo">
           <label for="rg">RG:</label>
-          <input type="text" class="campo-texto" id="rg" name="rg">
+          <input type="text" class="campo-texto" id="rg" name="rg" maxlength="20">
         </div>
         <div class="campo">
           <label for="data_emissao_rg">Data emissão RG:</label>
@@ -275,7 +275,7 @@
           </div>
           <div class="subcampo">
             <label for="uf">UF:</label>
-            <input type="text" class="campo-texto" id="uf" name="uf" required>
+            <input type="text" class="campo-texto" id="uf" name="uf" maxlength="2" required>
           </div>
         </div>
         <div class="campo">
@@ -383,6 +383,6 @@
 </main>
 {% endblock %}
 
-{ % block scripts %}
+{% block scripts %}
 <script src="{{ url_for('static', filename='js/validacao.js') }}"></script>
-{ % endblock %}
+{% endblock %}
