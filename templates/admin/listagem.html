@@ -40,30 +40,21 @@ messages %}
             <td>{{admin.email}}</td>
             <td>{{admin.cargo}}</td>
             <td class="acoes">
-              <button class="botao-acao editar">Editar</button>
-              <button class="botao-acao excluir">Excluir</button>
+              <form action="{{ url_for('admin_routes.editar', id=admin.id) }}" method="GET"
+              style="display:inline;">
+              <button type="submit" class="botao-acao editar">Editar</button>
+              </form>
+              <form action="{{ url_for('admin_routes.deletar', id=admin.id) }}" method="POST"
+              style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este administrador?');">
+              <button type="submit" class="botao-acao excluir">Excluir</button>
+            </form>
             </td>
           </tr>
-          {% endfor %}
-
-          <tr>
-            <td>João da Silva</td>
-            <td>joao@email.com</td>
-            <td>Analista</td>
-            <td class="acoes">
-              <button class="botao-acao editar">Editar</button>
-              <button class="botao-acao excluir">Excluir</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Maria Souza</td>
-            <td>maria@email.com</td>
-            <td>Gerente</td>
-            <td class="acoes">
-              <button class="botao-acao editar">Editar</button>
-              <button class="botao-acao excluir">Excluir</button>
-            </td>
-          </tr>
+          {% else %}
+        <tr>
+          <td colspan="5">Nenhum colaborador encontrado.</td>
+        </tr>
+        {% endfor %}
         </tbody>
       </table>
     </div>

@@ -12,6 +12,6 @@ def home():
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    pacientes = Paciente.query.all()
-    admins = Admin.query.all()
+    pacientes = Paciente.query.filter_by(ativo=True).all()
+    admins = Admin.query.filter_by(ativo=True).all()
     return render_template('dashboard.html', pacientes=pacientes, admins=admins, show_footer_and_nav=False)

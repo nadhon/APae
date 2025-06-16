@@ -1,6 +1,4 @@
-let cpf = document.getElementById('cpf');
-
-let listaCPF = document.querySelectorAll('.cpf');
+let listaCPF = document.querySelectorAll('.campo-cpf');
 
 listaCPF.forEach( item => {
   item.addEventListener('input', function(e) {
@@ -12,5 +10,3 @@ listaCPF.forEach( item => {
 						.replace(/(-\d{2})\d+?$/, '$1'); // Impede entrada de mais de 11 dígitos
   e.target.value = cpfPattern;
 })});
-
-console.log("oi")
