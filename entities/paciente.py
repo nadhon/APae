@@ -3,6 +3,7 @@ from entities.mae import Mae
 from entities.pai import Pai
 from entities.responsavel import Responsavel
 from entities.saude import Saude
+from entities.agendamento import Agendamento
 from sqlalchemy.orm import relationship
 from sqlalchemy import JSON
 
@@ -63,3 +64,4 @@ class Paciente(db.Model):
     pai = relationship('Pai', backref='pacientes')
     responsavel = relationship('Responsavel', backref='pacientes')
     saude = relationship('Saude', backref='pacientes')
+    
