@@ -34,5 +34,3 @@ def create_app():
     app.register_blueprint(agendamento.bp)
 
     return app
-
-app = create_app()
