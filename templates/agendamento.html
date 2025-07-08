@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Agendar Consulta{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agendamento.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Mensagens flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alertas">
+            {% for category, message in messages %}
+                <div class="alerta {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+<div class="container-agendamento">
+  <form method="POST" action="{{ url_for('agendamento.agendar') }}">
+
+  <div class="input-group">
+    <h1>Agendar Consulta</h1>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="nome_paciente" name="nome_paciente" placeholder=" " required>
+    <label for="nome_paciente">Nome do Paciente:</label>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="cpf_paciente" name="cpf_paciente" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder=" " required>
+    <label for="cpf_paciente">CPF:</label>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="telefone_paciente" name="telefone_paciente" placeholder=" " required>
+    <label for="telefone_paciente">Telefone:</label>
+  </div>
+
+  <div class="input-group">
+    <input type="datetime-local" id="data" name="data" placeholder=" " required>
+    <label for="data"></label>
+  </div>
+
+  <div class="input-group">
+    <input type="text" id="motivo" name="motivo" placeholder=" " required>
+    <label for="motivo">Motivo:</label>
+  </div>
+
+  <button type="submit">Agendar</button>
+  </form>
+</div>
+{% endblock %}
