@@ -2,6 +2,9 @@ import os
 from app import create_app
 from extensions import db
 from entities.admin import Admin
+from entities.paciente import Paciente 
+from entities.agendamento import Agendamento
+
 
 DB_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
 app = create_app()

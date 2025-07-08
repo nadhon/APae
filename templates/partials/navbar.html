@@ -10,6 +10,7 @@
     <li><a href="{{ url_for('dashboard.home') }}">Home</a></li>
     <li><a href="{{ url_for('dashboard.home') }}#contato">Contato</a></li>
     <li><a href="{{ url_for('dashboard.home') }}#sobre-nos">Sobre</a></li>
+    <li><a href="{{ url_for('agendamento.agendar') }}#servicos">Agendamento</a></li>
     {% if current_user.is_authenticated %}
     <li>
       <a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>

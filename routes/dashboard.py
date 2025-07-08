@@ -9,6 +9,10 @@ bp = Blueprint('dashboard', __name__)
 def home():
     return render_template('home.html')
 
+@bp.route('/')
+def agendamento():
+    return render_template('agendamento.html', show_footer_and_nav=False)
+
 @bp.route('/dashboard')
 @login_required
 def dashboard():
